@@ -1,4 +1,4 @@
-#WebScoreBoard
+# WebScoreBoard
 These code can boost field game by recording players' score and show leaderboard.
 
 
