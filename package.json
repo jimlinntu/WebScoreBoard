@@ -1,0 +1,23 @@
+{
+  "name": "webscoreboard",
+  "version": "1.0.0",
+  "description": "These code can boost field game by recording players' score and show leaderboard.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jimlinntu/WebScoreBoard.git"
+  },
+  "author": "jimlinntu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jimlinntu/WebScoreBoard/issues"
+  },
+  "homepage": "https://github.com/jimlinntu/WebScoreBoard#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4"
+  }
+}
