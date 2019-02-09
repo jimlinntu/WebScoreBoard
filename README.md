@@ -9,6 +9,7 @@ These code can boost field game by recording players' score and show leaderboard
 * npm v6.4.1
 * express 4.16.4
 * ejs 2.6.1
+* bodyParser 1.18.3
 
 ## Authors
 * [jimlinntu](https://github.com/jimlinntu)

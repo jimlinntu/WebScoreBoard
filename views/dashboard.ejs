@@ -12,20 +12,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>林子雋</td>
-                        <td>35</td>
-                        <td>74</td>
-                        <td>73</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <td>黃仁愉</td>
-                        <td>83495</td>
-                        <td>7293</td>
-                        <td>382</td>
-                        <td>238</td>
-                    </tr>
+                    <% players.forEach(function(player){ %>
+                        <tr>
+                            <td> <%= player.name %> </td>
+                            <td> <%= player.profession %> </td>
+                            <td> <%= player.social %> </td>
+                            <td> <%= player.money %> </td>
+                            <td> <%= player.love %> </td>
+                        <tr>
+                    <% }) %>
                 </tbody>
             </table>
         </div>

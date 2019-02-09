@@ -1,8 +1,11 @@
 var express = require("express");
 var app = express();
+var bodyParser = require("body-parser");
+
 // middleware
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
-// render will not need to add ejs anymore
+// Set view engine
 app.set("view engine", "ejs");
 
 app.get("/", function(req, res){
@@ -10,7 +13,9 @@ app.get("/", function(req, res){
 });
 
 app.get("/dashboard", function(req, res){
-    res.render("dashboard", {cssPath: "dashboard.css"});
+    var players = [ {name: "林子雋", profession: 432, social: 438, money: 12, love: 2839}, 
+                    {name: "黃仁愉", profession: 274, social: 233, money: 342, love: 293423}];
+    res.render("dashboard", {cssPath: "dashboard.css", players: players});
 });
 
 // redirect to home page
