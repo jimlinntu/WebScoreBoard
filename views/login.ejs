@@ -1,0 +1,17 @@
+<% include partials/header %>
+<div class="container">
+    <div class="row">
+        <form action="/login" method="POST">
+            <div class="form-group">
+                <label for="usernameFocus">使用者名稱</label>
+                <input type="text" name="username" class="form-control" id="usernameFocus" placeholder="使用者名稱">
+            </div>
+            <div class="form-group">
+                <label for="passwordFocus">使用者密碼</label>
+                <input type="password" name="password" class="form-control" id="passwordFocus" placeholder="密碼">
+            </div>
+            <button type="submit" class="btn btn-default">登入</button>
+        </form>
+    </div>
+</div>
+<% include partials/footer %>

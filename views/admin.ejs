@@ -1,0 +1,22 @@
+<% include partials/header %>
+<!-- This page is for input player's score -->
+<div class="container">
+    <h2 class="text-center">玩家列表</h2>
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th><i class="fas fa-users"></i> 玩家姓名</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% players.forEach(function(player){ %>
+                    <tr>
+                        <td><a href="/player/<%= player._id %>"><%= player.name %></a></td>
+                    <tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
+<% include partials/footer %>

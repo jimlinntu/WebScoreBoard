@@ -1,6 +1,7 @@
 body {
     padding-top: 70px;
-    background-image: url("/images/landpage.jpg");
+    /* As https://expressjs.com/en/starter/static-files.html instruct */
+    background-image: url("/images/landpage2-opt.jpg");
     background-size: cover;
     background-position: center;
     color: black;
