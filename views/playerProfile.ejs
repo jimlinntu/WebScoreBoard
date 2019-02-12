@@ -1,0 +1,92 @@
+<% include partials/header %>
+
+<div class="container">
+    <div class="row">
+        <!-- 玩家資訊 -->
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th><i class="fas fa-users"></i> 玩家姓名</th>
+                        <th><i class="fas fa-chalkboard-teacher"></i> 專業分數</th>
+                        <th><i class="fab fa-facebook-square"></i> 人脈分數</th>
+                        <th><i class="fas fa-money-bill-alt"></i> 金錢分數</th>
+                        <th><i class="fas fa-heart"></i> 愛情指數</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> <%= player.name %> </td>
+                        <td> <%= player.profession %> </td>
+                        <td> <%= player.social %> </td>
+                        <td> <%= player.money %> </td>
+                        <td> <%= player.love %> </td>
+                    <tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <% if(admin){ %>
+        <!-- 輸入新成績 -->
+        <div class="row">
+            <div>
+                <h3>輸入此關新獲得分數</h3>
+                <form class="form-inline" action="/player/<%= player._id %>/update" method="POST">
+                    <div class="form-group">
+                        <label for="profession"><i class="fas fa-chalkboard-teacher"></i> +專業分數</label>
+                        <input type="number" class="form-control" id="profession" name="profession" value="0" min="0" max="20">
+                    </div>
+                    <div class="form-group">
+                        <label for="social"><i class="fab fa-facebook-square"></i> +人脈分數</label>
+                        <input type="number" class="form-control" id="social" name="social" value="0" min="0" max="20">
+                    </div>
+                    <div class="form-group">
+                        <label for="money"><i class="fas fa-money-bill-alt"></i> +金錢分數</label>
+                        <input type="number" class="form-control" id="money" name="money" value="0" min="0" max="20">
+                    </div>
+                    <div class="form-group">
+                        <label for="love"><i class="fas fa-heart"></i> +愛情指數</label>
+                        <input type="number" class="form-control" id="love" name="love" value="0" min="0" max="20">
+                    </div>
+                    <button type="submit" class="btn btn-default btn-primary">提交</button>
+                </form>
+            </div>
+        </div>
+        <!-- 歷史紀錄 -->
+        <div class="row">
+            <h3>歷史紀錄</h3>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>時間戳記</th>
+                            <th>+專業分數</th>
+                            <th>+人脈分數</th>
+                            <th>+金錢分數</th>
+                            <th>+愛情指數</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% player.records.forEach(function(record){ %>
+                            <tr>
+                                <td> <%= record.date.toLocaleString() %> </td>
+                                <td> <%= record.profession %> </td>
+                                <td> <%= record.social %> </td>
+                                <td> <%= record.money %> </td>
+                                <td> <%= record.love %> </td>
+                                <td>
+                                    <form action="/player/<%= player._id %>/delete/<%= record._id %>" method="POST">
+                                        <button class="btn btn-default btn-xs btn-danger" type="submit">刪除</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    <% } %>
+</div>
+
+<% include partials/footer %>

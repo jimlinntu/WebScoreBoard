@@ -6,7 +6,12 @@ var playerSchema = new mongoose.Schema({
     social: Number,
     money: Number,
     love: Number,
-    records: [Date] // Input score records
+    records: [{ date: Date, 
+                profession: Number,
+                social: Number,
+                money: Number,
+                love: Number
+             }] // Input score records
 });
 
 module.exports = mongoose.model("Player", playerSchema);

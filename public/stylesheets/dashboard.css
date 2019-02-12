@@ -1,1 +1,9 @@
-body {padding-top: 70px;}
+body {
+    padding-top: 70px;
+}
+
+#tableCenter{
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
