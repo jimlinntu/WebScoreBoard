@@ -63,10 +63,53 @@ app.get("/", function(req, res){
     res.render("landpage", {cssPath: "landpage.css"});
 });
 
+function playerCompareFunction(type){
+    // sort with ascending order
+    return function(left, right){
+        if(left[type] < right[type]) return 1;
+        if(left[type] > right[type]) return -1;
+        // break the tie
+        if(left.sum < right.sum) return 1;
+        if(left.sum > right.sum) return -1;
+        // if there is still a tie, use random key
+        if(left.rand < right.rand) return 1;
+        if(left.rand > right.rand) return -1; 
+        // tie
+        return 0;
+    };
+};
+
+app.get("/debug", checkLoggedIn, function(req, res){
+    Player.find().lean().exec(function(err, players){
+        // from least significant to most significant
+        players.sort(playerCompareFunction("profession"));
+        players.sort(playerCompareFunction("social"));
+        players.sort(playerCompareFunction("money"));
+        players.sort(playerCompareFunction("love"));
+        players.sort(playerCompareFunction("sum"));
+        res.render("backdoor", {cssPath: "dashboard.css", players: players});
+    });
+});
+
+
 app.get("/dashboard", function(req, res){
-    Player.find(function(err, players){
+    Player.find().lean().exec(function(err, players){
         if(err) console.log(err);
-        res.render("dashboard", {cssPath: "dashboard.css", players: players});
+        // sort total
+        var types = ["profession", "social", "money", "love", "sum"];
+        // var types = ["sum"];
+        var sortedPlayers = {};
+        types.forEach(function(type){
+            // shallow copy(because we want sort primitive types)
+            sortedPlayers[type] = [];
+            players.forEach(function(player){
+                var cloned = Object.assign({}, player);
+                cloned.records = undefined; // do not need to consider records field
+                sortedPlayers[type].push(cloned); 
+            });
+            sortedPlayers[type].sort(playerCompareFunction(type));    
+        });
+        res.render("dashboard", {cssPath: "dashboard.css", sortedPlayers: sortedPlayers});
     });
 });
 
@@ -84,6 +127,7 @@ app.get("/logout", checkLoggedIn, function(req, res){
     req.logout();
     res.redirect("/");
 });
+
 // Player List Page
 app.get("/playerList", function(req, res){
     // Retreive all players
@@ -127,13 +171,26 @@ app.get("/player/:pid", function(req, res){
 app.post("/player/:pid/update", checkLoggedIn, function(req, res){
     var pid = req.params.pid;
     console.log(pid);
+
+    req.body.profession = Number(req.body.profession);
+    req.body.social = Number(req.body.social);
+    req.body.money = Number(req.body.money);
+    req.body.love = Number(req.body.love);
+    // input validation
+    if(Number.isNaN(req.body.profession) || Number.isNaN(req.body.social) || 
+        Number.isNaN(req.body.money) || Number.isNaN(req.body.love)){
+        res.redirect("/player/"+player._id);
+        return;
+    }
+
     // TODO: input validation
     var update = { $inc:
                     {
                         profession: req.body.profession,
                         social: req.body.social,
                         money: req.body.money,
-                        love: req.body.love
+                        love: req.body.love,
+                        sum: req.body.profession + req.body.social + req.body.money + req.body.love
                     },
                   $push:
                     {
@@ -165,6 +222,11 @@ app.post("/player/:pid/delete/:rid", checkLoggedIn, function(req, res){
     console.log(rid)
     // subtract and remove
     Player.findById(pid, function(err, player){
+        if(err){
+            console.log(err);
+            res.redirect("/player/" + player._id);
+            return;
+        }
         // https://mongoosejs.com/docs/subdocs.html#finding-a-subdocument
         var record = player.records.id(rid);
         // Subtract record value
@@ -172,11 +234,12 @@ app.post("/player/:pid/delete/:rid", checkLoggedIn, function(req, res){
         player.social -= record.social;
         player.money -= record.money;
         player.love -= record.love;
+        player.sum -= record.profession + record.social + player.money + record.love;
         record.remove()
-        player.save(function(err){
-            if(err){
+        player.save(function(err2){
+            if(err2){
                 console.trace();
-                console.log(err);
+                console.log(err2);
             }
         });
         res.redirect("/player/" + player._id);

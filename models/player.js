@@ -6,6 +6,8 @@ var playerSchema = new mongoose.Schema({
     social: Number,
     money: Number,
     love: Number,
+    sum: Number,
+    rand: Number,
     records: [{ date: Date, 
                 profession: Number,
                 social: Number,

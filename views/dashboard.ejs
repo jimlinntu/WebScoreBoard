@@ -1,28 +1,116 @@
 <% include partials/header %>
     <div class="container">
+        <div class="row">
             <div class="table-responsive">
                 <table class="table table-striped text-center" id="tableCenter">
                     <thead>
                         <tr>
+                            <th class="text-center"><i class="fas fa-trophy"></i> 名次</th>
                             <th class="text-center"><i class="fas fa-users"></i> 玩家姓名</th>
-                            <th class="text-center"><i class="fas fa-chalkboard-teacher"></i> 專業分數</th>
-                            <th class="text-center"><i class="fab fa-facebook-square"></i> 人脈分數</th>
-                            <th class="text-center"><i class="fas fa-money-bill-alt"></i> 金錢分數</th>
-                            <th class="text-center"><i class="fas fa-heart"></i> 愛情指數</th>
+                            <th class="text-center"><i class="fas fa-globe-asia"></i>總積分</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <% players.forEach(function(player){ %>
+                        <% for(var i = 0; i < 3; i ++){ %>
                             <tr>
-                                <td> <%= player.name %> </td>
-                                <td> <%= player.profession %> </td>
-                                <td> <%= player.social %> </td>
-                                <td> <%= player.money %> </td>
-                                <td> <%= player.love %> </td>
+                                <td><%= i + 1 %></td>
+                                <td><%= sortedPlayers["sum"][i].name %> </td>
+                                <td><%= sortedPlayers["sum"][i].sum %></td>
                             </tr>
-                        <% }) %>
+                        <% } %>
                     </tbody>
                 </table>
             </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">
+                <div class="table-responsive">
+                    <table class="table table-striped text-center" id="subTable">
+                        <thead>
+                            <tr>
+                                <th class="text-center"><i class="fas fa-trophy"></i> 名次</th>
+                                <th class="text-center"><i class="fas fa-users"></i> 玩家姓名</th>
+                                <th class="text-center"><i class="fas fa-chalkboard-teacher"></i> 專業分數</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(var i = 0; i < 3; i ++){ %>
+                                <tr>
+                                    <td> <%= i + 1 %></td>
+                                    <td> <%= sortedPlayers["profession"][i].name %> </td>
+                                    <td> <%= sortedPlayers["profession"][i].profession %> </td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="table-responsive">
+                    <table class="table table-striped text-center" id="subTable">
+                        <thead>
+                            <tr>
+                                <th class="text-center"><i class="fas fa-trophy"></i> 名次</th>
+                                <th class="text-center"><i class="fas fa-users"></i> 玩家姓名</th>
+                                <th class="text-center"><i class="fab fa-facebook-square"></i> 人脈分數</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(var i = 0; i < 3; i ++){ %>
+                                <tr>
+                                    <td> <%= i + 1 %></td>
+                                    <td> <%= sortedPlayers["social"][i].name %> </td>
+                                    <td> <%= sortedPlayers["social"][i].social %> </td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="table-responsive">
+                    <table class="table table-striped text-center" id="subTable">
+                        <thead>
+                            <tr>
+                                <th class="text-center"><i class="fas fa-trophy"></i> 名次</th>
+                                <th class="text-center"><i class="fas fa-users"></i> 玩家姓名</th>
+                                <th class="text-center"><i class="fas fa-money-bill-alt"></i> 金錢分數</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(var i = 0; i < 3; i ++){ %>
+                                <tr>
+                                    <td> <%= i + 1 %></td>
+                                    <td> <%= sortedPlayers["money"][i].name %> </td>
+                                    <td> <%= sortedPlayers["money"][i].money %> </td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col-xs-3">
+                <div class="table-responsive">
+                    <table class="table table-striped text-center" id="subTable">
+                        <thead>
+                            <tr>
+                                <th class="text-center"><i class="fas fa-trophy"></i> 名次</th>
+                                <th class="text-center"><i class="fas fa-users"></i> 玩家姓名</th>
+                                <th class="text-center"><i class="fas fa-heart"></i> 愛情指數</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(var i = 0; i < 3; i ++){ %>
+                                <tr>
+                                    <td> <%= i + 1 %></td>
+                                    <td> <%= sortedPlayers["love"][i].name %> </td>
+                                    <td> <%= sortedPlayers["love"][i].love %> </td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 <% include partials/footer %>

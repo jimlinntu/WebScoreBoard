@@ -15,7 +15,10 @@ records.forEach(function(record){
                    profession: record[1], 
                    social: record[2],
                    money: record[3],
-                   love: record[4]}, function(err, player){
+                   love: record[4],
+                   sum: record[5],
+                   rand: Math.random() // to break the tie
+                }, function(err, player){
                        if(err) {
                            console.log(err);
                        }

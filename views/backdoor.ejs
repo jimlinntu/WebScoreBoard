@@ -1,0 +1,36 @@
+<% include partials/header %>
+    <div class="container">
+        <div class="row">
+            <div class="table-responsive">
+                <table class="table table-striped text-center" id="tableCenter">
+                    <thead>
+                        <tr>
+                            <th class="text-center"><i class="fas fa-trophy"></i> 名次</th>
+                            <th class="text-center"><i class="fas fa-users"></i> 玩家姓名</th>
+                            <th class="text-center"><i class="fas fa-chalkboard-teacher"></i> 專業分數</th>
+                            <th class="text-center"><i class="fab fa-facebook-square"></i> 人脈分數</th>
+                            <th class="text-center"><i class="fas fa-money-bill-alt"></i> 金錢分數</th>
+                            <th class="text-center"><i class="fas fa-heart"></i> 愛情指數</th>
+                            <th class="text-center"><i class="fas fa-globe-asia"></i> 總積分</th>
+                            <th class="text-center"><i class="fas fa-dice"></i> 隨機值</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for(var i = 0; i < players.length; i ++){ %>
+                            <tr>
+                                <td><%= i + 1 %></td>
+                                <td><%= players[i].name %> </td>
+                                <td><%= players[i].profession %> </td>
+                                <td><%= players[i].social %> </td>
+                                <td><%= players[i].money %> </td>
+                                <td><%= players[i].love %> </td>
+                                <td><%= players[i].sum %></td>
+                                <td><%= players[i].rand %></td>
+                            </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+<% include partials/footer %>
