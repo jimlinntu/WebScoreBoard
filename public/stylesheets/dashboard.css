@@ -13,3 +13,13 @@ body {
     margin-left: auto;
     margin-right: auto;
 }
+
+#canvas {
+    width: 50%; 
+    margin: auto;
+}
+
+#subTableCanvas {
+    width: 110%;
+    margin: auto;
+}

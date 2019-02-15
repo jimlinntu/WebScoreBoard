@@ -224,6 +224,7 @@ app.post("/player/:pid/delete/:rid", checkLoggedIn, function(req, res){
     Player.findById(pid, function(err, player){
         if(err){
             console.log(err);
+            // e.g. if the record is deleted twice
             res.redirect("/player/" + player._id);
             return;
         }

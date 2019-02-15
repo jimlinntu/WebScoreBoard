@@ -1,22 +1,31 @@
 <% include partials/header %>
 <!-- This page is for input player's score -->
 <div class="container">
-    <h2 class="text-center">玩家列表</h2>
-    <div class="table-responsive">
-        <table class="table table-striped text-center" id="tableCenter">
-            <thead>
-                <tr>
-                    <th class="text-center"><i class="fas fa-users"></i> 玩家姓名</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% players.forEach(function(player){ %>
+    <h2 class="text-center"><i class="fas fa-users"></i> 玩家列表</h2>
+    <div class="row">
+        <% players.forEach(function(player){ %>
+            <div class="col-xs-4 text-center">
+                <a class="thumbnail" href="/player/<%= player._id %>"><%= player.name %></a></h3>
+            </div>
+        <% }) %>
+    </div> 
+    <% if(false){%>
+        <div class="table-responsive">
+            <table class="table table-striped text-center" id="tableCenter">
+                <thead>
                     <tr>
-                        <td><a href="/player/<%= player._id %>"><%= player.name %></a></td>
+                        <th class="text-center"><i class="fas fa-users"></i> 玩家姓名</th>
                     </tr>
-                <% }) %>
-            </tbody>
-        </table>
-    </div>
+                </thead>
+                <tbody>
+                    <% players.forEach(function(player){ %>
+                        <tr>
+                            <td><a href="/player/<%= player._id %>"><%= player.name %></a></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    <% }%>
 </div>
 <% include partials/footer %>

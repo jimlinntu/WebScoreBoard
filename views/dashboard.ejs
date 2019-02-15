@@ -1,116 +1,299 @@
 <% include partials/header %>
     <div class="container">
-        <div class="row">
-            <div class="table-responsive">
-                <table class="table table-striped text-center" id="tableCenter">
-                    <thead>
-                        <tr>
-                            <th class="text-center"><i class="fas fa-trophy"></i> 名次</th>
-                            <th class="text-center"><i class="fas fa-users"></i> 玩家姓名</th>
-                            <th class="text-center"><i class="fas fa-globe-asia"></i>總積分</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% for(var i = 0; i < 3; i ++){ %>
+
+        <% if(false){%>
+            <div class="row">
+                <div class="table-responsive">
+                    <table class="table table-striped text-center" id="tableCenter">
+                        <thead>
                             <tr>
-                                <td><%= i + 1 %></td>
-                                <td><%= sortedPlayers["sum"][i].name %> </td>
-                                <td><%= sortedPlayers["sum"][i].sum %></td>
+                                <th class="text-center"><i class="fas fa-trophy"></i> 名次</th>
+                                <th class="text-center"><i class="fas fa-users"></i> 玩家姓名</th>
+                                <th class="text-center"><i class="fas fa-globe-asia"></i>總積分</th>
                             </tr>
-                        <% } %>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <% for(var i = 0; i < 3; i ++){ %>
+                                <tr>
+                                    <td><%= i + 1 %></td>
+                                    <td><%= sortedPlayers["sum"][i].name %> </td>
+                                    <td><%= sortedPlayers["sum"][i].sum %></td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+            <div class="row">
+                <div class="col-md-3 col-xs-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped text-center" id="subTable">
+                            <thead>
+                                <tr>
+                                    <th class="text-center"><i class="fas fa-trophy"></i> 名次</th>
+                                    <th class="text-center"><i class="fas fa-users"></i> 玩家姓名</th>
+                                    <th class="text-center"><i class="fas fa-chalkboard-teacher"></i> 專業分數</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(var i = 0; i < 3; i ++){ %>
+                                    <tr>
+                                        <td> <%= i + 1 %></td>
+                                        <td> <%= sortedPlayers["profession"][i].name %> </td>
+                                        <td> <%= sortedPlayers["profession"][i].profession %> </td>
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped text-center" id="subTable">
+                            <thead>
+                                <tr>
+                                    <th class="text-center"><i class="fas fa-trophy"></i> 名次</th>
+                                    <th class="text-center"><i class="fas fa-users"></i> 玩家姓名</th>
+                                    <th class="text-center"><i class="fab fa-facebook-square"></i> 人脈分數</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(var i = 0; i < 3; i ++){ %>
+                                    <tr>
+                                        <td> <%= i + 1 %></td>
+                                        <td> <%= sortedPlayers["social"][i].name %> </td>
+                                        <td> <%= sortedPlayers["social"][i].social %> </td>
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped text-center" id="subTable">
+                            <thead>
+                                <tr>
+                                    <th class="text-center"><i class="fas fa-trophy"></i> 名次</th>
+                                    <th class="text-center"><i class="fas fa-users"></i> 玩家姓名</th>
+                                    <th class="text-center"><i class="fas fa-money-bill-alt"></i> 金錢分數</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(var i = 0; i < 3; i ++){ %>
+                                    <tr>
+                                        <td> <%= i + 1 %></td>
+                                        <td> <%= sortedPlayers["money"][i].name %> </td>
+                                        <td> <%= sortedPlayers["money"][i].money %> </td>
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-12">
+                    <div class="table-responsive">
+                        <table class="table table-striped text-center" id="subTable">
+                            <thead>
+                                <tr>
+                                    <th class="text-center"><i class="fas fa-trophy"></i> 名次</th>
+                                    <th class="text-center"><i class="fas fa-users"></i> 玩家姓名</th>
+                                    <th class="text-center"><i class="fas fa-heart"></i> 愛情指數</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(var i = 0; i < 3; i ++){ %>
+                                    <tr>
+                                        <td> <%= i + 1 %></td>
+                                        <td> <%= sortedPlayers["love"][i].name %> </td>
+                                        <td> <%= sortedPlayers["love"][i].love %> </td>
+                                    </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        <%}%>
+        <div class="row" id="canvas">
+            <h2 class="text-center"><i class="fas fa-globe-asia"></i> 總積分英雄榜</h2>
+            <canvas id="sumRankChart"></canvas>
         </div>
         <div class="row">
-            <div class="col-xs-3">
-                <div class="table-responsive">
-                    <table class="table table-striped text-center" id="subTable">
-                        <thead>
-                            <tr>
-                                <th class="text-center"><i class="fas fa-trophy"></i> 名次</th>
-                                <th class="text-center"><i class="fas fa-users"></i> 玩家姓名</th>
-                                <th class="text-center"><i class="fas fa-chalkboard-teacher"></i> 專業分數</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% for(var i = 0; i < 3; i ++){ %>
-                                <tr>
-                                    <td> <%= i + 1 %></td>
-                                    <td> <%= sortedPlayers["profession"][i].name %> </td>
-                                    <td> <%= sortedPlayers["profession"][i].profession %> </td>
-                                </tr>
-                            <% } %>
-                        </tbody>
-                    </table>
+            <div class="col-xs-6 col-md-3">
+                <h3 class="text-center"><i class="fas fa-chalkboard-teacher"></i> 專業英雄榜</h3>
+                <div id="subTableCanvas">
+                    <canvas id="professionRankChart"></canvas>
                 </div>
             </div>
-            <div class="col-xs-3">
-                <div class="table-responsive">
-                    <table class="table table-striped text-center" id="subTable">
-                        <thead>
-                            <tr>
-                                <th class="text-center"><i class="fas fa-trophy"></i> 名次</th>
-                                <th class="text-center"><i class="fas fa-users"></i> 玩家姓名</th>
-                                <th class="text-center"><i class="fab fa-facebook-square"></i> 人脈分數</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% for(var i = 0; i < 3; i ++){ %>
-                                <tr>
-                                    <td> <%= i + 1 %></td>
-                                    <td> <%= sortedPlayers["social"][i].name %> </td>
-                                    <td> <%= sortedPlayers["social"][i].social %> </td>
-                                </tr>
-                            <% } %>
-                        </tbody>
-                    </table>
+            <div class="col-xs-6 col-md-3">
+                <h3 class="text-center"><i class="fab fa-facebook-square"></i> 人脈英雄榜</h3>
+                <div id="subTableCanvas">
+                    <canvas id="socialRankChart"></canvas>
                 </div>
             </div>
-            <div class="col-xs-3">
-                <div class="table-responsive">
-                    <table class="table table-striped text-center" id="subTable">
-                        <thead>
-                            <tr>
-                                <th class="text-center"><i class="fas fa-trophy"></i> 名次</th>
-                                <th class="text-center"><i class="fas fa-users"></i> 玩家姓名</th>
-                                <th class="text-center"><i class="fas fa-money-bill-alt"></i> 金錢分數</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% for(var i = 0; i < 3; i ++){ %>
-                                <tr>
-                                    <td> <%= i + 1 %></td>
-                                    <td> <%= sortedPlayers["money"][i].name %> </td>
-                                    <td> <%= sortedPlayers["money"][i].money %> </td>
-                                </tr>
-                            <% } %>
-                        </tbody>
-                    </table>
+            <div class="col-xs-6 col-md-3">
+                <h3 class="text-center"><i class="fas fa-money-bill-alt"></i> 金錢英雄榜</h3>
+                <div id="subTableCanvas">
+                    <canvas id="moneyRankChart"></canvas>
                 </div>
             </div>
-            <div class="col-xs-3">
-                <div class="table-responsive">
-                    <table class="table table-striped text-center" id="subTable">
-                        <thead>
-                            <tr>
-                                <th class="text-center"><i class="fas fa-trophy"></i> 名次</th>
-                                <th class="text-center"><i class="fas fa-users"></i> 玩家姓名</th>
-                                <th class="text-center"><i class="fas fa-heart"></i> 愛情指數</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% for(var i = 0; i < 3; i ++){ %>
-                                <tr>
-                                    <td> <%= i + 1 %></td>
-                                    <td> <%= sortedPlayers["love"][i].name %> </td>
-                                    <td> <%= sortedPlayers["love"][i].love %> </td>
-                                </tr>
-                            <% } %>
-                        </tbody>
-                    </table>
+            <div class="col-xs-6 col-md-3">
+                <h3 class="text-center"><i class="fas fa-heart"></i> 愛情英雄榜</h3>
+                <div id="subTableCanvas">
+                    <canvas id="loveRankChart"></canvas>
                 </div>
             </div>
         </div>
     </div>
+        
+    <script src="/javascript/Chart.min.js"></script>
+    <!-- https://www.chartjs.org/docs/latest/charts/bar.html -->
+    <script>
+    
+    <% Object.keys(sortedPlayers).forEach(function(key){ %>
+        var ctx = document.getElementById('<%= key %>RankChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'bar',
+
+            // The data for our dataset
+            data: {
+                labels: [
+                    "<%= sortedPlayers[key][2].name %>", 
+                    "<%= sortedPlayers[key][0].name %>", 
+                    "<%= sortedPlayers[key][1].name %>"
+                ],
+                datasets: [{
+                    // label: "總積分",
+                    backgroundColor: [
+                        "rgba(255, 99, 132, 0.5)", 
+                        "rgba(255, 159, 64, 0.5)",
+                        "rgba(255, 205, 86, 0.5)"
+                    ],
+                    borderColor: [
+                        "rgba(255, 99, 132, 0.5)", 
+                        "rgba(255, 159, 64, 0.5)", 
+                        "rgba(255, 205, 86, 0.5)"
+                    ],
+                    borderWidth: 2,
+                    data: [
+                        <%= sortedPlayers[key][2][key]%>, 
+                        <%= sortedPlayers[key][0][key] %>, 
+                        <%= sortedPlayers[key][1][key] %>]
+                }]
+            },
+
+            // Configuration options go here
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                layout: {
+                    padding: {
+                        left: 18,
+                        right: 18,
+                        top: 18,
+                        bottom: 18
+                    }
+                },
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            fontSize: 18,
+                            fontColor: "black",
+                            beginAtZero: true,
+                            suggestedMax: Number(<%= sortedPlayers[key][0][key] %>)+3
+                        }
+                    }],
+                    xAxes: [{
+                        ticks:{
+                            fontSize: 16,
+                            fontColor: "black"
+                        },
+                        gridLines: {
+                            display: true
+                        },
+                        display: true
+
+                    }]
+                },
+                legend: {
+                    labels: {
+                        fontSize: 16,
+                        fontColor: "black"
+                    },
+                    display: false
+                }
+            }
+        });
+    <% }) %>
+    
+
+
+    // var ctx = document.getElementById('sumRankChart').getContext('2d');
+    // var chart = new Chart(ctx, {
+    //     // The type of chart we want to create
+    //     type: 'bar',
+
+    //     // The data for our dataset
+    //     data: {
+    //         labels: [
+    //             "<%= sortedPlayers["sum"][2].name %>", 
+    //             "<%= sortedPlayers["sum"][0].name %>", 
+    //             "<%= sortedPlayers["sum"][1].name %>"
+    //         ],
+    //         datasets: [{
+    //             // label: "總積分",
+    //             backgroundColor: [
+    //                 "rgba(255, 99, 132, 0.5)", 
+    //                 "rgba(255, 159, 64, 0.5)",
+    //                 "rgba(255, 205, 86, 0.5)"
+    //             ],
+    //             borderColor: [
+    //                 "rgba(255, 99, 132, 0.5)", 
+    //                 "rgba(255, 159, 64, 0.5)", 
+    //                 "rgba(255, 205, 86, 0.5)"
+    //             ],
+    //             borderWidth: 2,
+    //             data: [
+    //                 "<%= sortedPlayers["sum"][2].sum %>", 
+    //                 "<%= sortedPlayers["sum"][0].sum %>", 
+    //                 "<%= sortedPlayers["sum"][1].sum %>"]
+    //         }]
+    //     },
+
+    //     // Configuration options go here
+    //     options: {
+    //         scales: {
+    //             yAxes: [{
+    //                 ticks: {
+    //                     fontSize: 18,
+    //                     fontColor: "black",
+    //                     beginAtZero: true,
+    //                     suggestedMax: Number(<%= sortedPlayers["sum"][0].sum %>)+3
+    //                 }
+    //             }],
+    //             xAxes: [{
+    //                 ticks:{
+    //                     fontSize: 18,
+    //                     fontColor: "black"
+    //                 }
+    //             }]
+    //         },
+    //         legend: {
+    //             labels: {
+    //                 fontSize: 18,
+    //                 fontColor: "black"
+    //             },
+    //             display: false
+    //         }
+    //     }
+    // });
+
+    
+    </script>
+
+
+
+    
 <% include partials/footer %>
