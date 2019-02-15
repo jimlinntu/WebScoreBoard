@@ -15,6 +15,7 @@ See package.json
 * mongoose 5.4.10
 * passport 0.4.0
 * passport-local 1.0.0
+* chart.js 2.7.3
 
 ## Authors
 * [jimlinntu](https://github.com/jimlinntu)
