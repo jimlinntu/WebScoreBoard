@@ -7,6 +7,15 @@ body {
     margin-left: auto;
     margin-right: auto;
 }
+/* https://stackoverflow.com/questions/36873753/make-table-auto-scroll-vertically-via-html-css */
+#animationTable{
+    max-width: 50%;
+    /* height: 50%; */
+    /* overflow-y: auto; */
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
 #subTable{
     max-width: 100%;
@@ -15,11 +24,11 @@ body {
 }
 
 #canvas {
-    width: 50%; 
+    width: 75%;
     margin: auto;
 }
 
 #subTableCanvas {
-    width: 110%;
+    width: 75%;
     margin: auto;
 }

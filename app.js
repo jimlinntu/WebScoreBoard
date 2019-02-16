@@ -93,6 +93,7 @@ app.get("/debug", checkLoggedIn, function(req, res){
 
 
 app.get("/dashboard", function(req, res){
+    // "lean" is for avoid other information from the database
     Player.find().lean().exec(function(err, players){
         if(err) console.log(err);
         // sort total
@@ -155,7 +156,7 @@ app.get("/player/:pid", function(req, res){
     Player.findById(pid, function(err, player){
         if(err){
             console.log(err);
-            // if somethings wrong(like someone type wrong pid to url)
+            // if somethings wrong (like someone type wrong pid to url)
             res.redirect("/playerList");
         }else{
             if(player){
@@ -184,18 +185,15 @@ app.post("/player/:pid/update", checkLoggedIn, function(req, res){
     }
 
     // TODO: input validation
-    var update = { $inc:
-                    {
+    var update = { $inc: {
                         profession: req.body.profession,
                         social: req.body.social,
                         money: req.body.money,
                         love: req.body.love,
                         sum: req.body.profession + req.body.social + req.body.money + req.body.love
                     },
-                  $push:
-                    {
-                        records: 
-                        { 
+                  $push: {
+                        records: { 
                             date: new Date(), 
                             profession: req.body.profession,
                             social: req.body.social,
@@ -210,7 +208,7 @@ app.post("/player/:pid/update", checkLoggedIn, function(req, res){
         callback = function(err, player){
             if(err) console.log(err); // update failed
             console.log("[*] Update Player Result");
-            res.redirect("/player/"+player._id); // after database update, redirect
+            res.redirect("/player/" + player._id); // after database update, redirect
         };
     // Incremental update
     Player.findByIdAndUpdate(pid, update, options, callback);
@@ -225,17 +223,25 @@ app.post("/player/:pid/delete/:rid", checkLoggedIn, function(req, res){
         if(err){
             console.log(err);
             // e.g. if the record is deleted twice
-            res.redirect("/player/" + player._id);
+            res.redirect("/player/" + pid);
             return;
         }
         // https://mongoosejs.com/docs/subdocs.html#finding-a-subdocument
+        // Find the record
         var record = player.records.id(rid);
+        console.log(record);
+        // if null record, then redirect
+        if(!record){
+            console.log(record);
+            res.redirect("/player/" + player._id);
+            return;
+        }
         // Subtract record value
         player.profession -= record.profession;
         player.social -= record.social;
         player.money -= record.money;
         player.love -= record.love;
-        player.sum -= record.profession + record.social + player.money + record.love;
+        player.sum -= record.profession + record.social + record.money + record.love;
         record.remove()
         player.save(function(err2){
             if(err2){
