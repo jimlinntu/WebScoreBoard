@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="table-responsive">
-                <table class="table table-striped text-center" id="animationTable">
+                <table class="table table-striped text-center">
                     <thead> 
                         <tr>
                             <th class="text-center"><i class="fas fa-trophy"></i> 名次</th>
@@ -16,7 +16,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% for(var i = 0; i < players.length; i ++){ %>
+                        <% for(var i = 0; i < players.length; i++){ %>
                             <tr>
                                 <td><%= i + 1 %></td>
                                 <td><%= players[i].name %> </td>

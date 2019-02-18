@@ -29,7 +29,7 @@
 <div class="container">
     <div class="row">
         <!-- 玩家資訊 -->
-        <h3 class="text-center">玩家資訊</h3>
+        <h3 class="text-center"><i class="fas fa-info"></i> 玩家資訊</h3>
         <hr>
         <div class="table-responsive">
             <table class="table table-striped">
@@ -37,7 +37,7 @@
                     <tr>
                         <th><i class="fas fa-users"></i> 玩家姓名</th>
                         <th><i class="fas fa-chalkboard-teacher"></i> 專業分數</th>
-                        <th><i class="fab fa-facebook-square"></i> 人脈分數</th>
+                        <th><i class="fab fa-facebook-square"></i> 社交分數</th>
                         <th><i class="fas fa-money-bill-alt"></i> 金錢分數</th>
                         <th><i class="fas fa-heart"></i> 愛情指數</th>
                     </tr>
@@ -57,7 +57,7 @@
     <% if(admin){ %>
         <!-- 輸入新成績 -->
         <div class="row">
-            <h3 class="text-center">輸入此關新獲得分數</h3>
+            <h3 class="text-center"><i class="fas fa-plus"></i> 輸入此關新獲得分數</h3>
             <hr>
             <form class="form-inline text-center" action="/player/<%= player._id %>/update" method="POST" name="submitForm" onsubmit="return inputValidation()">
                 <div class="form-group">
@@ -65,7 +65,7 @@
                     <input style="max-width: 80%; margin: auto;" type="number" class="form-control" id="profession" name="profession" value="0" min="0" max="20">
                 </div>
                 <div class="form-group">
-                    <label for="social"><i class="fab fa-facebook-square"></i> +人脈分數</label>
+                    <label for="social"><i class="fab fa-facebook-square"></i> +社交分數</label>
                     <input style="max-width: 80%; margin: auto;" type="number" class="form-control" id="social" name="social" value="0" min="0" max="20">
                 </div>
                 <div class="form-group">
@@ -81,7 +81,7 @@
         </div>
         <!-- 歷史紀錄 -->
         <div class="row">
-            <h3 class="text-center">歷史紀錄</h3>
+            <h3 class="text-center"><i class="fas fa-history"></i> 歷史紀錄</h3>
             <hr>
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -89,7 +89,7 @@
                         <tr>
                             <th>時間戳記</th>
                             <th>+專業分數</th>
-                            <th>+人脈分數</th>
+                            <th>+社交分數</th>
                             <th>+金錢分數</th>
                             <th>+愛情指數</th>
                             <th></th>

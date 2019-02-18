@@ -9,12 +9,14 @@ body {
 }
 /* https://stackoverflow.com/questions/36873753/make-table-auto-scroll-vertically-via-html-css */
 #animationTable{
-    max-width: 50%;
-    /* height: 50%; */
-    /* overflow-y: auto; */
+    width: 70vw;
+    height: 20vh;
+    overflow-y: scroll;
     margin-left: auto;
     margin-right: auto;
 }
+/* Descendant combinator */
+
 
 
 #subTable{
@@ -23,12 +25,19 @@ body {
     margin-right: auto;
 }
 
+/* https://github.com/chartjs/Chart.js/issues/2958 */
 #canvas {
-    width: 75%;
+    width: 90%;
+    position: relative;
+    height: 30vh;
     margin: auto;
 }
 
 #subTableCanvas {
-    width: 75%;
+    width: 90%;
+    position: relative;
+    height: 20vh;
     margin: auto;
 }
+
+

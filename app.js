@@ -27,13 +27,6 @@ Admin.register(new Admin({username: "admin"}), "admin", function(err, user){
 
 
 
-// players.push(new Player(
-//     {name: "林子雋", profession: 432, social: 438, money: 12, love: 2839}), 
-//     new Player({name: "黃仁愉", profession: 274, social: 233, money: 342, love: 293423}));
-
-// players.forEach(function(p){
-//     p.save();
-// });
 // ==========
 // Set view engine
 app.set("view engine", "ejs");
@@ -110,7 +103,7 @@ app.get("/dashboard", function(req, res){
             });
             sortedPlayers[type].sort(playerCompareFunction(type));    
         });
-        res.render("dashboard", {cssPath: "dashboard.css", sortedPlayers: sortedPlayers});
+        res.render("dashboard", {cssPath: "dashboard.css", sortedPlayers: sortedPlayers, players: players});
     });
 });
 
