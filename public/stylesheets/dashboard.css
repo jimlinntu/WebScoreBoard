@@ -8,17 +8,46 @@ body {
     margin-right: auto;
 }
 /* https://stackoverflow.com/questions/36873753/make-table-auto-scroll-vertically-via-html-css */
-#animationTable{
+/* #animationTable{
     width: 70vw;
     height: 20vh;
     overflow-y: scroll;
     margin-left: auto;
     margin-right: auto;
-}
+} */
 /* Descendant combinator */
+/* https://stackoverflow.com/questions/21683697/horizontal-center-the-content-of-a-div-with-display-table-row */
+#animationTable{
+    max-width: 85%;
+    margin: 0 auto;
+}
+table#fixHeaderTable > thead > tr{
+    display: table;
+    margin: 0 auto;
+}
+table#fixHeaderTable > tbody > tr{
+    display: table;
+    margin: 0 auto;
+}
 
-
-
+table#fixHeaderTable > thead{
+    display: block;
+    overflow-x: scroll;
+    width: 100%;
+}
+table#fixHeaderTable > tbody{
+    display: block;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    height: 15vh;
+    width: 100%;
+}
+table#fixHeaderTable > thead > tr > th{
+    width: 150px;
+}
+table#fixHeaderTable > tbody > tr > td{
+    width: 150px;
+}
 #subTable{
     max-width: 100%;
     margin-left: auto;

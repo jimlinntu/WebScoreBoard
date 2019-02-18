@@ -1,5 +1,5 @@
 // https://stackoverflow.com/questions/36873753/make-table-auto-scroll-vertically-via-html-css
-var $el = $("#animationTable");
+var $el = $("table#fixHeaderTable > tbody");
 function anim() {
   // current scroll bar's top's position
   var stop = $el.scrollTop();
