@@ -21,13 +21,13 @@ body {
     max-width: 85%;
     margin: 0 auto;
 }
-table#fixHeaderTable > thead > tr{
+
+table#fixHeaderTable > thead > tr, table#fixHeaderTable > tbody > tr{
     display: table;
+    margin-left: 0;
+    margin-right: 0;
     margin: 0 auto;
-}
-table#fixHeaderTable > tbody > tr{
-    display: table;
-    margin: 0 auto;
+    width: 100%;
 }
 
 table#fixHeaderTable > thead{
@@ -42,11 +42,12 @@ table#fixHeaderTable > tbody{
     height: 15vh;
     width: 100%;
 }
+/* We must set parent so that percentage can be applied */
 table#fixHeaderTable > thead > tr > th{
-    width: 150px;
+    width: 100px;
 }
 table#fixHeaderTable > tbody > tr > td{
-    width: 150px;
+    width: 100px;
 }
 #subTable{
     max-width: 100%;
