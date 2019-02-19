@@ -37,7 +37,7 @@ table#fixHeaderTable > thead{
 }
 table#fixHeaderTable > tbody{
     display: block;
-    overflow-y: scroll;
+    overflow-y: scroll; /*I guess is because bootstrap default has no overflow-y*/
     overflow-x: scroll;
     height: 15vh;
     width: 100%;
