@@ -21,7 +21,7 @@ body {
     max-width: 85%;
     margin: 0 auto;
 }
-
+/* Because tr is originally displayed as table-row, which is a inline-block */
 table#fixHeaderTable > thead > tr, table#fixHeaderTable > tbody > tr{
     display: table;
     margin-left: 0;
