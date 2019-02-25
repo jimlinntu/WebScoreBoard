@@ -59,8 +59,8 @@ app.get("/", function(req, res){
 function playerCompareFunction(type){
     // sort with ascending order
     return function(left, right){
-        if(left[type] < right[type]) return 1;
-        if(left[type] > right[type]) return -1;
+        if(left[type] < right[type]) return 1; // left should be placed after right
+        if(left[type] > right[type]) return -1; // left should be placed before right
         // break the tie
         if(left.sum < right.sum) return 1;
         if(left.sum > right.sum) return -1;
@@ -86,12 +86,11 @@ app.get("/debug", checkLoggedIn, function(req, res){
 
 
 app.get("/dashboard", function(req, res){
-    // "lean" is for avoid other information from the database
+    // "lean" is for avoiding other information from the database
     Player.find().lean().exec(function(err, players){
         if(err) console.log(err);
         // sort total
         var types = ["profession", "social", "money", "love", "sum"];
-        // var types = ["sum"];
         var sortedPlayers = {};
         types.forEach(function(type){
             // shallow copy(because we want sort primitive types)
@@ -101,6 +100,7 @@ app.get("/dashboard", function(req, res){
                 cloned.records = undefined; // do not need to consider records field
                 sortedPlayers[type].push(cloned); 
             });
+            // sort player with respect to "type"
             sortedPlayers[type].sort(playerCompareFunction(type));    
         });
         res.render("dashboard", {cssPath: "dashboard.css", sortedPlayers: sortedPlayers, players: players});
@@ -128,6 +128,7 @@ app.get("/playerList", function(req, res){
     Player.find(function(err, players){
         if(err){
             console.log(err);
+            res.redirect("/");
         }else{
             players.sort(function(lplayer, rplayer){
                 if(lplayer._id < rplayer._id){
@@ -216,7 +217,7 @@ app.post("/player/:pid/delete/:rid", checkLoggedIn, function(req, res){
         if(err){
             console.log(err);
             // e.g. if the record is deleted twice
-            res.redirect("/player/" + pid);
+            res.redirect("/player/" + pid); // if the pid is still not found, /player/:pid will be redirect by other routes
             return;
         }
         // https://mongoosejs.com/docs/subdocs.html#finding-a-subdocument
@@ -235,7 +236,8 @@ app.post("/player/:pid/delete/:rid", checkLoggedIn, function(req, res){
         player.money -= record.money;
         player.love -= record.love;
         player.sum -= record.profession + record.social + record.money + record.love;
-        record.remove()
+        // remove record from database
+        record.remove() //reference: https://mongoosejs.com/docs/subdocs.html
         player.save(function(err2){
             if(err2){
                 console.trace();
