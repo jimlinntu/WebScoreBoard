@@ -17,5 +17,8 @@ See package.json
 * passport-local 1.0.0
 * chart.js 2.7.3
 
+## TODO:
+* Dockerize it
+
 ## Authors
 * [jimlinntu](https://github.com/jimlinntu)
