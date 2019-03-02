@@ -174,7 +174,7 @@ app.post("/player/:pid/update", checkLoggedIn, function(req, res){
     // input validation
     if(Number.isNaN(req.body.profession) || Number.isNaN(req.body.social) || 
         Number.isNaN(req.body.money) || Number.isNaN(req.body.love)){
-        res.redirect("/player/"+player._id);
+        res.redirect("/player/" + pid);
         return;
     }
 
