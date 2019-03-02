@@ -1,5 +1,5 @@
 # WebScoreBoard
-These code can boost field game by recording players' score and show leaderboard.
+The code can boost field game by recording players' score and show the leaderboard.
 ## Demo
 ### Landpage
 ![Landpage](demo/landpage.png)
