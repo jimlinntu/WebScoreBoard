@@ -59,14 +59,14 @@ table#fixHeaderTable > tbody > tr > td{
 #canvas {
     width: 90%;
     position: relative;
-    height: 30vh;
+    height: 25vh;
     margin: auto;
 }
 
 #subTableCanvas {
     width: 90%;
     position: relative;
-    height: 20vh;
+    height: 15vh;
     margin: auto;
 }
 
