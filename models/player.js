@@ -2,17 +2,20 @@ var mongoose = require("mongoose");
 
 var playerSchema = new mongoose.Schema({
     name: String,
-    profession: Number,
-    social: Number,
-    money: Number,
-    love: Number,
-    sum: Number,
+    talent: Number, 
+    sport: Number,
+    knowledge: Number,
+    game: Number,
+    comparison: Number,
+    response: Number,
     rand: Number,
     records: [{ date: Date, 
-                profession: Number,
-                social: Number,
-                money: Number,
-                love: Number
+                talent: Number, 
+                sport: Number,
+                knowledge: Number,
+                game: Number,
+                comparison: Number,
+                response: Number,
              }] // Input score records
 });
 

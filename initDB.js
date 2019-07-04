@@ -3,7 +3,7 @@ var parse = require("csv-parse/lib/sync"),
     Player = require("./models/player"),
     mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost:27017/dreamheartDB",  { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost:27017/tellmegoodgood",  { useNewUrlParser: true });
 var playerFormString = fs.readFileSync("playerForm.csv").toString();
 var records = parse(playerFormString, {from: 2}); // throw away header row
 Player.remove({}, function(err, players){
@@ -12,11 +12,12 @@ Player.remove({}, function(err, players){
 
 records.forEach(function(record){
     Player.create({name: record[0], 
-                   profession: 0, 
-                   social: 0,
-                   money: 0,
-                   love: 0,
-                   sum: 0,
+                   talent: 0, 
+                   sport: 0,
+                   knowledge: 0,
+                   game: 0,
+                   comparison: 0,
+                   response: 0,
                    rand: Math.random() // to break the tie
                 }, function(err, player){
                        if(err) {

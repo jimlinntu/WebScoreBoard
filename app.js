@@ -10,9 +10,9 @@ var express = require("express"),
 var app = express();
 
 // connect database
-mongoose.connect("mongodb://localhost:27017/dreamheartDB",  { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost:27017/tellmegoodgood",  { useNewUrlParser: true });
 
-// Set up admin account
+// Set up admin account: `admin` and password: `admin`
 Admin.register(new Admin({username: "admin"}), "admin", function(err, user){
     if(err){
         if(err.name == "UserExistsError"){
@@ -61,9 +61,6 @@ function playerCompareFunction(type){
     return function(left, right){
         if(left[type] < right[type]) return 1; // left should be placed after right
         if(left[type] > right[type]) return -1; // left should be placed before right
-        // break the tie
-        if(left.sum < right.sum) return 1;
-        if(left.sum > right.sum) return -1;
         // if there is still a tie, use random key
         if(left.rand < right.rand) return 1;
         if(left.rand > right.rand) return -1; 
@@ -75,11 +72,12 @@ function playerCompareFunction(type){
 app.get("/debug", checkLoggedIn, function(req, res){
     Player.find().lean().exec(function(err, players){
         // from least significant to most significant
-        players.sort(playerCompareFunction("profession"));
-        players.sort(playerCompareFunction("social"));
-        players.sort(playerCompareFunction("money"));
-        players.sort(playerCompareFunction("love"));
-        players.sort(playerCompareFunction("sum"));
+        players.sort(playerCompareFunction("talent"));
+        players.sort(playerCompareFunction("sport"));
+        players.sort(playerCompareFunction("knowledge"));
+        players.sort(playerCompareFunction("game"));
+        players.sort(playerCompareFunction("comparison"));
+        players.sort(playerCompareFunction("response"));
         res.render("backdoor", {cssPath: "dashboard.css", players: players});
     });
 });
@@ -90,7 +88,7 @@ app.get("/dashboard", function(req, res){
     Player.find().lean().exec(function(err, players){
         if(err) console.log(err);
         // sort total
-        var types = ["profession", "social", "money", "love", "sum"];
+        var types = ["talent", "sport", "knowledge", "game", "comparison", "response"];
         var sortedPlayers = {};
         types.forEach(function(type){
             // shallow copy(because we want sort primitive types)
@@ -167,32 +165,38 @@ app.post("/player/:pid/update", checkLoggedIn, function(req, res){
     var pid = req.params.pid;
     console.log(pid);
 
-    req.body.profession = Number(req.body.profession);
-    req.body.social = Number(req.body.social);
-    req.body.money = Number(req.body.money);
-    req.body.love = Number(req.body.love);
-    // input validation
-    if(Number.isNaN(req.body.profession) || Number.isNaN(req.body.social) || 
-        Number.isNaN(req.body.money) || Number.isNaN(req.body.love)){
+    req.body.talent = Number(req.body.talent);
+    req.body.sport = Number(req.body.sport);
+    req.body.knowledge = Number(req.body.knowledge);
+    req.body.game = Number(req.body.game);
+    req.body.comparison = Number(req.body.comparison);
+    req.body.response = Number(req.body.response);
+    
+    // input validation(double check): If the player's updated scores are not valid, redirect to player profile page
+    if(Number.isNaN(req.body.talent) || Number.isNaN(req.body.sport) || 
+        Number.isNaN(req.body.knowledge) || Number.isNaN(req.body.game) || 
+        Number.isNaN(req.body.comparison) || Number.isNaN(req.body.response)){
         res.redirect("/player/" + pid);
         return;
     }
 
-    // TODO: input validation
     var update = { $inc: {
-                        profession: req.body.profession,
-                        social: req.body.social,
-                        money: req.body.money,
-                        love: req.body.love,
-                        sum: req.body.profession + req.body.social + req.body.money + req.body.love
+                        talent: req.body.talent,
+                        sport: req.body.sport,
+                        knowledge: req.body.knowledge,
+                        game: req.body.game,
+                        comparison: req.body.comparison,
+                        response: req.body.response
                     },
                   $push: {
                         records: { 
                             date: new Date(), 
-                            profession: req.body.profession,
-                            social: req.body.social,
-                            money: req.body.money,
-                            love: req.body.love
+                            talent: req.body.talent,
+                            sport: req.body.sport,
+                            knowledge: req.body.knowledge,
+                            game: req.body.game,
+                            comparison: req.body.comparison,
+                            response: req.body.response
                         }
                     }
                 }
@@ -200,14 +204,19 @@ app.post("/player/:pid/update", checkLoggedIn, function(req, res){
             new: true
         },
         callback = function(err, player){
-            if(err) console.log(err); // update failed
-            console.log("[*] Update Player Result");
-            res.redirect("/player/" + player._id); // after database update, redirect
+            // if the player is not found, redirect it to the player list page 
+            if(err){
+                console.log(err); // update failed
+                res.redirect("/playerList");
+            }else{
+                console.log("[*] Update Player Result");
+                res.redirect("/player/" + player._id); // after database update, redirect
+            }
         };
     // Incremental update
     Player.findByIdAndUpdate(pid, update, options, callback);
 });
-// Delete record
+// Delete record (rid == record id)
 app.post("/player/:pid/delete/:rid", checkLoggedIn, function(req, res){
     var pid = req.params.pid, rid = req.params.rid;
     console.log(pid)
@@ -230,12 +239,13 @@ app.post("/player/:pid/delete/:rid", checkLoggedIn, function(req, res){
             res.redirect("/player/" + player._id);
             return;
         }
-        // Subtract record value
-        player.profession -= record.profession;
-        player.social -= record.social;
-        player.money -= record.money;
-        player.love -= record.love;
-        player.sum -= record.profession + record.social + record.money + record.love;
+        // Subtract the record value
+        player.talent -= record.talent;
+        player.sport -= record.sport;
+        player.knowledge -= record.knowledge;
+        player.game -= record.game;
+        player.comparison -= record.comparison;
+        player.response -= record.response;
         // remove record from database
         record.remove() //reference: https://mongoosejs.com/docs/subdocs.html
         player.save(function(err2){

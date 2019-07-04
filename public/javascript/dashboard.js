@@ -11,7 +11,7 @@ function anim() {
   // if on the first half, it will go to bottom
   // if on the second half, it will go to top
   // 0: go back to the top
-  $el.animate({scrollTop: stop<sbottom/2 ? sbottom : 0}, 4000, anim);
+  $el.animate({scrollTop: stop<sbottom/2 ? sbottom : 0}, 12000, anim);
 }
 
 // fix header at top: https://stackoverflow.com/questions/673153/html-table-with-fixed-headers

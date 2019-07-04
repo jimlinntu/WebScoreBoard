@@ -3,21 +3,26 @@
     function inputValidation(){
         var submitForm = document.forms["submitForm"];
         var formDict = {};
-        formDict.profession = Number(submitForm["profession"].value);
-        formDict.social = Number(submitForm["social"].value);
-        formDict.money = Number(submitForm["money"].value);
-        formDict.love = Number(submitForm["love"].value);
-        if(Number.isNaN(formDict.profession) || 
-            Number.isNaN(formDict.social) || 
-            Number.isNaN(formDict.money) || 
-            Number.isNaN(formDict.love)
+        formDict.talent = Number(submitForm["talent"].value);
+        formDict.sport = Number(submitForm["sport"].value);
+        formDict.knowledge = Number(submitForm["knowledge"].value);
+        formDict.game = Number(submitForm["game"].value);
+        formDict.comparison = Number(submitForm["comparison"].value);
+        formDict.response = Number(submitForm["response"].value);
+        if(Number.isNaN(formDict.talent) || 
+            Number.isNaN(formDict.sport) || 
+            Number.isNaN(formDict.knowledge) || 
+            Number.isNaN(formDict.game) || 
+            Number.isNaN(formDict.comparison) || 
+            Number.isNaN(formDict.response)
             ){
             alert("請輸入數字");
             return false;
         }
         // Only less than one field can have value
-        var fieldCount = (formDict.profession > 0) + (formDict.social > 0 ) +
-            (formDict.money > 0) + (formDict.love > 0)
+        var fieldCount = (formDict.talent > 0) + (formDict.sport > 0 ) +
+            (formDict.knowledge > 0) + (formDict.game > 0) +
+            (formDict.comparison > 0) + (formDict.response > 0)
         if(fieldCount > 1){
             alert("最多一個欄位可以輸入成績");
             return false;
@@ -36,19 +41,23 @@
                 <thead>
                     <tr>
                         <th><i class="fas fa-users"></i> 玩家姓名</th>
-                        <th><i class="fas fa-chalkboard-teacher"></i> 專業分數</th>
-                        <th><i class="fab fa-facebook-square"></i> 社交分數</th>
-                        <th><i class="fas fa-money-bill-alt"></i> 金錢分數</th>
-                        <th><i class="fas fa-heart"></i> 愛情指數</th>
+                        <th><i class="fas fa-palette"></i> 才藝分數</th>
+                        <th><i class="fas fa-volleyball-ball"></i> 運動分數</th>
+                        <th><i class="far fa-lightbulb"></i> 知識分數</th>
+                        <th><i class="fas fa-gamepad"></i> 遊戲分數</th>
+                        <th><i class="fas fa-greater-than"></i> 超級比一比分數</th>
+                        <th><i class="fas fa-reply"></i> 反應分數</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td> <%= player.name %> </td>
-                        <td> <%= player.profession %> </td>
-                        <td> <%= player.social %> </td>
-                        <td> <%= player.money %> </td>
-                        <td> <%= player.love %> </td>
+                        <td> <%= player.talent %> </td>
+                        <td> <%= player.sport %> </td>
+                        <td> <%= player.knowledge %> </td>
+                        <td> <%= player.game %> </td>
+                        <td> <%= player.comparison %> </td>
+                        <td> <%= player.response %> </td>
                     <tr>
                 </tbody>
             </table>
@@ -61,20 +70,28 @@
             <hr>
             <form class="form-inline text-center" action="/player/<%= player._id %>/update" method="POST" name="submitForm" onsubmit="return inputValidation()">
                 <div class="form-group">
-                    <label for="profession"><i class="fas fa-chalkboard-teacher"></i> +專業分數</label>
-                    <input style="max-width: 80%; margin: auto;" type="number" class="form-control" id="profession" name="profession" value="0" min="0" max="20">
+                    <label for="talent"><i class="fas fa-palette"></i> +才藝分數</label>
+                    <input style="max-width: 80%; margin: auto;" type="number" class="form-control" id="talent" name="talent" value="0" min="0" max="1000">
                 </div>
                 <div class="form-group">
-                    <label for="social"><i class="fab fa-facebook-square"></i> +社交分數</label>
-                    <input style="max-width: 80%; margin: auto;" type="number" class="form-control" id="social" name="social" value="0" min="0" max="20">
+                    <label for="sport"><i class="fas fa-volleyball-ball"></i> +運動分數</label>
+                    <input style="max-width: 80%; margin: auto;" type="number" class="form-control" id="sport" name="sport" value="0" min="0" max="1000">
                 </div>
                 <div class="form-group">
-                    <label for="money"><i class="fas fa-money-bill-alt"></i> +金錢分數</label>
-                    <input style="max-width: 80%; margin: auto;" type="number" class="form-control" id="money" name="money" value="0" min="0" max="20">
+                    <label for="knowledge"><i class="far fa-lightbulb"></i> +知識分數</label>
+                    <input style="max-width: 80%; margin: auto;" type="number" class="form-control" id="knowledge" name="knowledge" value="0" min="0" max="1000">
                 </div>
                 <div class="form-group">
-                    <label for="love"><i class="fas fa-heart"></i> +愛情指數</label>
-                    <input style="max-width: 80%; margin: auto;" type="number" class="form-control" id="love" name="love" value="0" min="0" max="20">
+                    <label for="game"><i class="fas fa-gamepad"></i> +遊戲分數</label>
+                    <input style="max-width: 80%; margin: auto;" type="number" class="form-control" id="game" name="game" value="0" min="0" max="1000">
+                </div>
+                <div class="form-group">
+                    <label for="comparison"><i class="fas fa-greater-than"></i> +超級比一比分數</label>
+                    <input style="max-width: 80%; margin: auto;" type="number" class="form-control" id="comparison" name="comparison" value="0" min="0" max="1000">
+                </div>
+                <div class="form-group">
+                    <label for="response"><i class="fas fa-reply"></i> +反應分數</label>
+                    <input style="max-width: 80%; margin: auto;" type="number" class="form-control" id="response" name="response" value="0" min="0" max="1000">
                 </div>
                     <button type="submit" class="btn btn-default btn-primary">提交</button>
             </form>
@@ -88,21 +105,24 @@
                     <thead>
                         <tr>
                             <th>時間戳記</th>
-                            <th>+專業分數</th>
-                            <th>+社交分數</th>
-                            <th>+金錢分數</th>
-                            <th>+愛情指數</th>
-                            <th></th>
+                            <th>+才藝分數</th>
+                            <th>+運動分數</th>
+                            <th>+知識分數</th>
+                            <th>+遊戲分數</th>
+                            <th>+超級比一比分數</th>
+                            <th>+反應分數</th>
                         </tr>
                     </thead>
                     <tbody>
                         <% player.records.forEach(function(record){ %>
                             <tr>
                                 <td> <%= record.date.toLocaleString() %> </td>
-                                <td> <%= record.profession %> </td>
-                                <td> <%= record.social %> </td>
-                                <td> <%= record.money %> </td>
-                                <td> <%= record.love %> </td>
+                                <td> <%= record.talent %> </td>
+                                <td> <%= record.sport %> </td>
+                                <td> <%= record.knowledge %> </td>
+                                <td> <%= record.game %> </td>
+                                <td> <%= record.comparison %> </td>
+                                <td> <%= record.response %> </td>
                                 <td>
                                     <form action="/player/<%= player._id %>/delete/<%= record._id %>" method="POST">
                                         <button class="btn btn-default btn-xs btn-danger" type="submit">刪除</button>

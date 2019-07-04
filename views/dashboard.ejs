@@ -6,57 +6,73 @@
                     <thead> 
                         <tr>
                             <th class="text-center"><i class="fas fa-users"></i> 玩家姓名</th>
-                            <th class="text-center"><i class="fas fa-chalkboard-teacher"></i> 專業分數</th>
-                            <th class="text-center"><i class="fab fa-facebook-square"></i> 社交分數</th>
-                            <th class="text-center"><i class="fas fa-money-bill-alt"></i> 金錢分數</th>
-                            <th class="text-center"><i class="fas fa-heart"></i> 愛情指數</th>
-                            <th class="text-center"><i class="fas fa-globe-asia"></i> 總積分</th>
+                            <th class="text-center"><i class="fas fa-palette"></i> 才藝分數</th>
+                            <th class="text-center"><i class="fas fa-volleyball-ball"></i> 運動分數</th>
+                            <th class="text-center"><i class="far fa-lightbulb"></i> 知識分數</th>
+                            <th class="text-center"><i class="fas fa-gamepad"></i> 遊戲分數</th>
+                            <th class="text-center"><i class="fas fa-greater-than"></i> 超級比一比分數</th>
+                            <th class="text-center"><i class="fas fa-reply"></i> 反應分數</th>
                         </tr>
                     </thead>
                     <tbody>
                         <% for(var i = 0; i < players.length; i++){ %>
                             <tr>
                                 <td><%= players[i].name %> </td>
-                                <td><%= players[i].profession %> </td>
-                                <td><%= players[i].social %> </td>
-                                <td><%= players[i].money %> </td>
-                                <td><%= players[i].love %> </td>
-                                <td><%= players[i].sum %></td>
+                                <td><%= players[i].talent %> </td>
+                                <td><%= players[i].sport %> </td>
+                                <td><%= players[i].knowledge %> </td>
+                                <td><%= players[i].game %> </td>
+                                <td><%= players[i].comparison %></td>
+                                <td><%= players[i].response %></td>
                             </tr>
                         <% } %>
                     </tbody>
                 </table>
             </div>
         </div>
+        <!-- 
         <div class="row">
             <h2 class="text-center"><i class="fas fa-globe-asia"></i> 總積分英雄榜</h2>
             <div id="canvas">
                 <canvas id="sumRankChart"></canvas>
             </div>
         </div>
+        -->
         <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-3">
-                <h3 class="text-center"><i class="fas fa-chalkboard-teacher"></i> 專業英雄榜</h3>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <h3 class="text-center"><i class="fas fa-palette"></i> 才藝英雄榜</h3>
                 <div id="subTableCanvas">
-                    <canvas id="professionRankChart"></canvas>
+                    <canvas id="talentRankChart"></canvas>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-3">
-                <h3 class="text-center"><i class="fab fa-facebook-square"></i> 社交英雄榜</h3>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <h3 class="text-center"><i class="fas fa-volleyball-ball"></i> 運動英雄榜</h3>
                 <div id="subTableCanvas">
-                    <canvas id="socialRankChart"></canvas>
+                    <canvas id="sportRankChart"></canvas>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-3">
-                <h3 class="text-center"><i class="fas fa-money-bill-alt"></i> 金錢英雄榜</h3>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <h3 class="text-center"><i class="far fa-lightbulb"></i> 知識英雄榜</h3>
                 <div id="subTableCanvas">
-                    <canvas id="moneyRankChart"></canvas>
+                    <canvas id="knowledgeRankChart"></canvas>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-3">
-                <h3 class="text-center"><i class="fas fa-heart"></i> 愛情英雄榜</h3>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <h3 class="text-center"><i class="fas fa-gamepad"></i> 遊戲英雄榜</h3>
                 <div id="subTableCanvas">
-                    <canvas id="loveRankChart"></canvas>
+                    <canvas id="gameRankChart"></canvas>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <h3 class="text-center"><i class="fas fa-greater-than"></i> 超級比一比英雄榜</h3>
+                <div id="subTableCanvas">
+                    <canvas id="comparisonRankChart"></canvas>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <h3 class="text-center"><i class="fas fa-reply"></i> 反應英雄榜</h3>
+                <div id="subTableCanvas">
+                    <canvas id="responseRankChart"></canvas>
                 </div>
             </div>
         </div>
@@ -143,68 +159,68 @@
         });
     <% }) %>
     
+    // Comment out
+    <% if(false){ %>
+         var ctx = document.getElementById('sumRankChart').getContext('2d');
+         var chart = new Chart(ctx, {
+             // The type of chart we want to create
+             type: 'bar',
 
+             // The data for our dataset
+             data: {
+                 labels: [
+                     "<%= sortedPlayers["sum"][2].name %>", 
+                     "<%= sortedPlayers["sum"][0].name %>", 
+                     "<%= sortedPlayers["sum"][1].name %>"
+                 ],
+                 datasets: [{
+                     // label: "總積分",
+                     backgroundColor: [
+                         "rgba(255, 99, 132, 0.5)", 
+                         "rgba(255, 159, 64, 0.5)",
+                         "rgba(255, 205, 86, 0.5)"
+                     ],
+                     borderColor: [
+                         "rgba(255, 99, 132, 0.5)", 
+                         "rgba(255, 159, 64, 0.5)", 
+                         "rgba(255, 205, 86, 0.5)"
+                     ],
+                     borderWidth: 2,
+                     data: [
+                         "<%= sortedPlayers["sum"][2].sum %>", 
+                         "<%= sortedPlayers["sum"][0].sum %>", 
+                         "<%= sortedPlayers["sum"][1].sum %>"]
+                 }]
+             },
 
-    // var ctx = document.getElementById('sumRankChart').getContext('2d');
-    // var chart = new Chart(ctx, {
-    //     // The type of chart we want to create
-    //     type: 'bar',
-
-    //     // The data for our dataset
-    //     data: {
-    //         labels: [
-    //             "<%= sortedPlayers["sum"][2].name %>", 
-    //             "<%= sortedPlayers["sum"][0].name %>", 
-    //             "<%= sortedPlayers["sum"][1].name %>"
-    //         ],
-    //         datasets: [{
-    //             // label: "總積分",
-    //             backgroundColor: [
-    //                 "rgba(255, 99, 132, 0.5)", 
-    //                 "rgba(255, 159, 64, 0.5)",
-    //                 "rgba(255, 205, 86, 0.5)"
-    //             ],
-    //             borderColor: [
-    //                 "rgba(255, 99, 132, 0.5)", 
-    //                 "rgba(255, 159, 64, 0.5)", 
-    //                 "rgba(255, 205, 86, 0.5)"
-    //             ],
-    //             borderWidth: 2,
-    //             data: [
-    //                 "<%= sortedPlayers["sum"][2].sum %>", 
-    //                 "<%= sortedPlayers["sum"][0].sum %>", 
-    //                 "<%= sortedPlayers["sum"][1].sum %>"]
-    //         }]
-    //     },
-
-    //     // Configuration options go here
-    //     options: {
-    //         scales: {
-    //             yAxes: [{
-    //                 ticks: {
-    //                     fontSize: 18,
-    //                     fontColor: "black",
-    //                     beginAtZero: true,
-    //                     suggestedMax: Number(<%= sortedPlayers["sum"][0].sum %>)+3
-    //                 }
-    //             }],
-    //             xAxes: [{
-    //                 ticks:{
-    //                     fontSize: 18,
-    //                     fontColor: "black"
-    //                 }
-    //             }]
-    //         },
-    //         legend: {
-    //             labels: {
-    //                 fontSize: 18,
-    //                 fontColor: "black"
-    //             },
-    //             display: false
-    //         }
-    //     }
-    // });
-
+             // Configuration options go here
+             options: {
+                 scales: {
+                     yAxes: [{
+                         ticks: {
+                             fontSize: 18,
+                             fontColor: "black",
+                             beginAtZero: true,
+                             suggestedMax: Number(<%= sortedPlayers["sum"][0].sum %>)+3
+                         }
+                     }],
+                     xAxes: [{
+                         ticks:{
+                             fontSize: 18,
+                             fontColor: "black"
+                         }
+                     }]
+                 },
+                 legend: {
+                     labels: {
+                         fontSize: 18,
+                         fontColor: "black"
+                     },
+                     display: false
+                 }
+             }
+         });
+    <% } %>
     
     </script>
     
