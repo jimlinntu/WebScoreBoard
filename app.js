@@ -131,7 +131,7 @@ app.get("/playerList", function(req, res){
             players.sort(function(lplayer, rplayer){
                 if(lplayer._id < rplayer._id){
                     return -1;
-                }else if(lplayer > rplayer._id){
+                }else if(lplayer._id > rplayer._id){
                     return 1;
                 }else{
                     return 0;
