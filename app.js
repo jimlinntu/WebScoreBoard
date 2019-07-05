@@ -214,6 +214,7 @@ app.post("/player/:pid/update", checkLoggedIn, function(req, res){
             }
         };
     // Incremental update
+    // See the doc: https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate
     Player.findByIdAndUpdate(pid, update, options, callback);
 });
 // Delete record (rid == record id)
@@ -248,6 +249,8 @@ app.post("/player/:pid/delete/:rid", checkLoggedIn, function(req, res){
         player.response -= record.response;
         // remove record from database
         record.remove() //reference: https://mongoosejs.com/docs/subdocs.html
+        // See the doc: https://stackoverflow.com/questions/14199529/mongoose-find-modify-save
+        // It is called `mongoose document updating` : https://mongoosejs.com/docs/documents.html
         player.save(function(err2){
             if(err2){
                 console.trace();
