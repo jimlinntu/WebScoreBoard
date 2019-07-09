@@ -1,0 +1,15 @@
+# https://hub.docker.com/_/mongo?tab=description
+FROM mongo:4.0.10-xenial
+COPY . /app
+WORKDIR /app
+# https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-16-04
+RUN apt-get update
+RUN apt-get install -y curl
+# https://github.com/nodesource/distributions/blob/master/README.md
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
+RUN apt-get install -y nodejs
+RUN npm install
+# mongo default exposed port
+EXPOSE 27017
+# start mongod daemon
+CMD ["mongod"]

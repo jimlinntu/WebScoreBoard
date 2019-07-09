@@ -88,6 +88,16 @@ See package.json
 
 * chart.js 2.7.3
 
+# Dockerize App
+* Build images from docker files
+```
+docker build -f ./dockerfiles/Dockerfile-mongo -t web-score-board .
+docker build -f ./dockerfiles/Dockerfile-mongo -t database  .
+```
+* Run multiple dockerize app in the host
+```
+```
+
 
 ## TODO:
 * Dockerize it
