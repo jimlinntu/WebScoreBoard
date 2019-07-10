@@ -3,14 +3,15 @@ var parse = require("csv-parse/lib/sync"),
     Player = require("./models/player"),
     mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost:27017/tellmegoodgood",  { useNewUrlParser: true });
+
+mongoose.connect("mongodb://localhost:27017/tellmegoodgood2",  { useNewUrlParser: true });
 var playerFormString = fs.readFileSync("playerForm.csv").toString();
 var records = parse(playerFormString, {from: 2}); // throw away header row
 Player.remove({}, function(err, players){
     if(err) console.log(err);
 });
 
-records.forEach(function(record){
+records.forEach(function(record, index){
     Player.create({name: record[0], 
                    talent: 0, 
                    sport: 0,
@@ -24,5 +25,12 @@ records.forEach(function(record){
                            console.log(err);
                        }
                        else console.log(player);
-                   });
+                    // Turn off db connection
+                    if(index == records.length-1){
+                        mongoose.connection.close();
+                    }
+            });
+
 });
+
+

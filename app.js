@@ -9,8 +9,8 @@ var express = require("express"),
 
 var app = express();
 
-// connect database
-mongoose.connect("mongodb://localhost:27017/tellmegoodgood",  { useNewUrlParser: true });
+// connect database ( by a docker network )
+mongoose.connect("mongodb://database.webnet:27017/tellmegoodgood",  { useNewUrlParser: true });
 
 // Set up admin account: `admin` and password: `admin`
 Admin.register(new Admin({username: "admin"}), "admin", function(err, user){
@@ -274,7 +274,7 @@ app.get("*", function(req, res){
     res.redirect("/");
 });
 
-app.listen(3000, "localhost", function(){
+app.listen(3000, "0.0.0.0", function(){
     console.log("[*] Server Started...")
 });
 
