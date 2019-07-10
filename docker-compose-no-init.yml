@@ -16,7 +16,8 @@ services:
             - database
         networks:
             - webnet
-
+        # Override default command built in the image
+        command: "node app.js"
         
     database:
         build: 

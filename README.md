@@ -97,7 +97,11 @@ docker-compose -f ./docker-compose.yml build
 ```
 * Start the service
 ```
-docker-compose -f ./docker-compose.yml up
+docker-compose -f ./docker-compose.yml up database
+# Wait for seconds because mounting persistent data may take some time
+
+(initialize the database) docker-compose -f ./docker-compose.yml up web
+(do not initialize the database) docker-compose -f ./docker-compose-no-init.yml up web
 ```
 * End the service
 ```
@@ -131,7 +135,6 @@ docker logs database
 
 
 ## TODO:
-* Dockerize it
 * Use pm2  
 
 ## Authors
