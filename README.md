@@ -88,15 +88,46 @@ See package.json
 
 * chart.js 2.7.3
 
-# Dockerize App
+# Dockerized Application
+
+## Docker Compose (For Lazy Person)
+* (Optional: because `docker-compose up` will build for you) Build the service
+```
+docker-compose -f ./docker-compose.yml build
+```
+* Start the service
+```
+docker-compose -f ./docker-compose.yml up
+```
+* End the service
+```
+docker-compose -f ./docker-compose.yml down
+```
+
+## Manually Deploy Instructions
+
 * Build images from docker files
 ```
-docker build -f ./dockerfiles/Dockerfile-mongo -t web-score-board .
+cd WebScoreBoard
+docker build -f ./dockerfiles/Dockerfile-node -t web-score-board .
 docker build -f ./dockerfiles/Dockerfile-mongo -t database  .
+```
+* Create docker bridge network
+```
+docker network create webnet --opt=com.docker.network.bridge.host_binding_ipv4=0.0.0.0 --opt=com.docker.network.bridge.enable_ip_masquerade=true --opt=com.docker.network.bridge.enable_icc=true --opt=com.docker.network.bridge.name=webnetBridge
 ```
 * Run multiple dockerize app in the host
 ```
+docker run -d --rm --name database  --net webnet database
+# Note that -d docker command line does not support relative path
+docker run --rm --name web --net webnet  web-score-board
 ```
+* You can debug using or simply remove the `-d` flag in order to directly see the outputs of the containers:
+```
+docker logs web
+docker logs database
+```
+
 
 
 ## TODO:

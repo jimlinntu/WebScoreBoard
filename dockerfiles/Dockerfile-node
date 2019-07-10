@@ -4,4 +4,5 @@ COPY . /app
 WORKDIR /app
 RUN npm install
 EXPOSE 3000
-CMD ["node", "app.js"]
+# https://stackoverflow.com/questions/46797348/docker-cmd-exec-form-for-multiple-command-execution?rq=1
+CMD ["sh", "-c", "node initDB.js && node app.js"]

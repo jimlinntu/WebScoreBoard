@@ -4,7 +4,7 @@ var parse = require("csv-parse/lib/sync"),
     mongoose = require("mongoose");
 
 
-mongoose.connect("mongodb://localhost:27017/tellmegoodgood2",  { useNewUrlParser: true });
+mongoose.connect("mongodb://database.webnet:27017/tellmegoodgood",  { useNewUrlParser: true });
 var playerFormString = fs.readFileSync("playerForm.csv").toString();
 var records = parse(playerFormString, {from: 2}); // throw away header row
 Player.remove({}, function(err, players){
